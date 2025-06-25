@@ -22,4 +22,7 @@ from primera_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/',views.index, name="index"),
+    path('producto/', views.producto, name="producto"),
+    path('clientes/', views.clientes, name="clientes"),
+    path('busqueda/', views.buscar, name="buscar"),
 ]
