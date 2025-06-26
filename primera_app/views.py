@@ -6,9 +6,9 @@ def index(request):
     context = {"mensaje": "¡Hola, mundo desde Django!"}
     return render(request, "primera_app/index.html", context)
 
-def producto(request):
+def productos(request):
     context = {"mensaje": "¡Bienvenido a la sección de productos!"}
-    return render(request, "primera_app/producto.html", context)
+    return render(request, "primera_app/productos.html", context)
 
 def clientes(request):
     context = {"mensaje": "¡Bienvenido a la sección de clientes!"}
