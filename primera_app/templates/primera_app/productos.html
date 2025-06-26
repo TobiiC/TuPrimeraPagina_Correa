@@ -13,7 +13,16 @@
                         <div class="text-center text-white">
                             <!-- Page heading-->
                             <h1 class="mb-5">Productos</h1>    
-                            <p class="mb-5"></p> <!-- lista de productos -->
+                                <div class="producto-lista">
+                                <p>Productos disponibles: {{ productos|length }}</p>
+                                    {% for producto in productos %}
+                                        <div class="producto">
+                                            <h3>{{ producto.nombre }}</h3>
+                                            <p class="precio">${{ producto.precio }}</p>
+                                            <p>{{ producto.descripcion }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             
                         </div>
                     </div>
