@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Prodcutos{% endblock %}
 
 {% block contenido %}
 <header class="masthead">
@@ -11,17 +11,19 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
-                            <!-- Page heading-->
                             <h1 class="mb-5">Productos</h1>    
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <a class="btn btn-primary" href="{% url 'formulario_producto'%}">Agregar Producto</a>
+                            </div>
                                 <div class="producto-lista">
-                                <p>Productos disponibles: {{ productos|length }}</p>
-                                    {% for producto in productos %}
-                                        <div class="producto">
-                                            <h3>{{ producto.nombre }}</h3>
-                                            <p class="precio">${{ producto.precio }}</p>
-                                            <p>{{ producto.descripcion }}</p>
-                                        </div>
-                                    {% endfor %}
+                                        {% for producto in productos %}
+                                            <div class="producto">
+                                                <h3>{{ producto.nombre }}</h3>
+                                                <p class="precio">${{ producto.precio }}</p>
+                                                <p>{{ producto.descripcion }}</p>
+                                                <br>
+                                            </div>
+                                        {% endfor %}
                                 </div>
                             
                         </div>

@@ -1,23 +1,24 @@
 from django import forms
 from .models import vendedor, producto, cliente
 
-class VendedorForm(forms.ModelForm):
+class vendedor_formulario(forms.ModelForm):
     class Meta:
         model = vendedor
-        fields = ['username', 'email', 'password']
+        fields = ['nombre', 'apellido', 'email']
         widgets = {
-            'password': forms.PasswordInput(),
+            'email': forms.EmailInput(),
         }
 
-class producto(forms.ModelForm):
+
+class producto_formulario(forms.ModelForm):
     class Meta:
         model = producto
         fields = ['nombre', 'descripcion', 'precio']
         widgets = {
-            'Codigo de Producto': forms.NumberInput(),
+            'codigo_producto': forms.NumberInput(),
         }
 
-class ClienteForm(forms.ModelForm):
+class cliente_formulario(forms.ModelForm):
     class Meta:
         model = cliente
         fields = ['nombre', 'email']

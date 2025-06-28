@@ -1,0 +1,41 @@
+{% extends 'primera_app/padre.html' %}
+
+{% load static %}
+
+{% block title %}Resultados Busqueda{% endblock %}
+
+{% block contenido %}
+<header class="masthead">
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4 text-center">Resultados de la búsqueda</h4>
+
+                        <p class="lead">Estamos buscando el producto: <strong>{{ nombre }}</strong></p>
+
+                        {% if productos %}
+                            <ul class="list-group">
+                                {% for producto in productos %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><strong>Producto:</strong> {{ producto.nombre }}</span>
+                                        <span><strong>Precio:</strong> {{ producto.precio }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="alert alert-warning mt-3" role="alert">
+                                No se encontró ningun producto con ese nombre.
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>       
+{% endblock %}

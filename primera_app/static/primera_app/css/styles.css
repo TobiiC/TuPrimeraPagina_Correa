@@ -10839,10 +10839,12 @@ textarea.form-control-lg {
 }
 
 header.masthead {
+  background-image:url("/static/primera_app/assets/img/bg-imagenfondonueva.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   position: relative;
   background-color: #343a40;
-  background: url("../assets/img/bg-masthead.jpg") no-repeat center center;
-  background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
 }
@@ -10897,7 +10899,10 @@ header.masthead h1, header.masthead .h1 {
 .call-to-action {
   position: relative;
   background-color: #343a40;
-  background: url("../assets/img/bg-masthead.jpg") no-repeat center center;
+  background-image:url("/static/primera_app/assets/img/bg-imagenfondonueva.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
   padding-top: 7rem;
   padding-bottom: 7rem;

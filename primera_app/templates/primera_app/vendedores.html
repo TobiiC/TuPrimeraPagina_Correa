@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Vendedores{% endblock %}
 
 {% block contenido %}
 <header class="masthead">
@@ -12,8 +12,20 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Vendedores</h1>    
-                            <p class="mb-5"></p> <!-- lista de vendedores -->
+                            <h1 class="mb-5">Vendedores</h1> 
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <a class="btn btn-primary" href="{% url 'formulario_vendedor'%}">Agregar Vendedor</a>
+                            </div>
+                                <div class="vendedor-lista">
+                                    {% for vendedor in vendedores %} 
+                                        <div class="vendedor">
+                                            <p class ="Nombre">Nombre : {{ vendedor.nombre }}</p>
+                                            <p class="Apellido">Apellido : {{ vendedor.apellido }}</p>
+                                            <p class="Contacto">Contacto : {{ vendedor.email }}</p>
+                                            <br>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             
                         </div>
                     </div>

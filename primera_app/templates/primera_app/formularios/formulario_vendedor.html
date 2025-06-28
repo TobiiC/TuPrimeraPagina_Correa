@@ -1,0 +1,39 @@
+{%  extends 'primera_app/padre.html' %} 
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block contenido %}
+<header class="masthead">
+{% if formularioVendedor.errors %}
+    <div class="alert alert-danger text-center" role="alert">
+        Hay datos incorrectos en el formulario. Por favor, corrígelos e inténtalo de nuevo.
+    </div>
+{% endif %}
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Agregar Vendedor</h3>
+
+                        <form method="POST" action="{% url 'formulario_vendedor' %}">
+                            {% csrf_token %}
+                            <table class="table table-borderless">
+                                {{ formularioVendedor.as_table }}
+                            </table>
+                            <div class="d-grid">
+                                <input type="submit" class="btn btn-primary" value="Enviar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}

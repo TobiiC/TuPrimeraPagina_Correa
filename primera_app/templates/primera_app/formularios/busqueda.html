@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Buscar{% endblock %}
 
 {% block contenido %}
 <header class="masthead">
@@ -12,9 +12,15 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Buscar</h1>    
-                            <p class="mb-5"></p> <!-- poner busqueda -->
-                            
+                            <h1 class="mb-5">Buscar Producto</h1>    
+                            <form action="/resultados_busqueda/" method="GET">
+
+                                <input type="text" name="nombre" id="nombre">
+
+                                <input type="submit" value="Buscar">
+
+                            </form>
+                            <p class="mb-5">Ingrese el nombre del producto que desea buscar.</p>
                         </div>
                     </div>
                 </div>
