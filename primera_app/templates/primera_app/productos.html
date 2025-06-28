@@ -14,13 +14,14 @@
                             <h1 class="mb-5">Productos</h1>    
                             <div class="position-absolute top-0 end-0 m-3">
                                 <a class="btn btn-primary" href="{% url 'formulario_producto'%}">Agregar Producto</a>
+                                <a class="btn btn-primary" href="{% url 'buscar'%}">Buscar Producto</a>
                             </div>
                                 <div class="producto-lista">
                                         {% for producto in productos %}
                                             <div class="producto">
                                                 <h3>{{ producto.nombre }}</h3>
-                                                <p class="precio">${{ producto.precio }}</p>
                                                 <p>{{ producto.descripcion }}</p>
+                                                <p class="precio">Precio: ${{ producto.precio }}</p>
                                                 <br>
                                             </div>
                                         {% endfor %}

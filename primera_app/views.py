@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import producto, vendedor, cliente
 from .forms import vendedor_formulario, cliente_formulario, producto_formulario
 from django.http import HttpResponse
@@ -29,7 +29,7 @@ def formulario_vendedor(request):
         formularioVendedor = vendedor_formulario(request.POST)
         if formularioVendedor.is_valid():
             formularioVendedor.save()
-            return render(request, "primera_app/formularios/formulario_vendedor.html", {"mensaje": "Vendedor guardado exitosamente."})
+            return redirect('vendedores')
     else:
         formularioVendedor = vendedor_formulario()
     
@@ -40,7 +40,7 @@ def formulario_cliente(request):
         formularioCliente = cliente_formulario(request.POST)
         if formularioCliente.is_valid():
             formularioCliente.save()
-            return render(request, "primera_app/formularios/formulario_cliente.html", {"mensaje": "Cliente guardado exitosamente."})
+            return redirect('clientes')  # Redirige a la lista de clientes después de guardar
     else:
         formularioCliente = cliente_formulario()
     
@@ -51,7 +51,7 @@ def formulario_producto(request):
         formularioProducto = producto_formulario(request.POST)
         if formularioProducto.is_valid():
             formularioProducto.save()
-            return render(request, "primera_app/formularios/formulario_producto.html", {"mensaje": "Producto guardado exitosamente."})
+            return redirect('productos')  # Redirige a la lista de productos después de guardar
     else:
         formularioProducto = producto_formulario()
     
