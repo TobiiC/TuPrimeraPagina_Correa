@@ -6,7 +6,7 @@ class vendedor(models.Model):
     email = models.EmailField(unique=True)
     
     def __str__(self):
-        return f"Vendedor: {self.username}, Email: {self.email}"
+        return f"Vendedor: {self.nombre}, Email: {self.email}"
 
 class producto(models.Model):
     codigo_producto = models.CharField(max_length=10, primary_key = True)
