@@ -1,4 +1,4 @@
-# primer_proyecto_django
+# TuPrimeraPagina-Correa
 
 Iniciar el servidor
 Ejecutá python manage.py runserver y abrilo en tu navegador.
