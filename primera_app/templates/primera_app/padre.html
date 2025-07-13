@@ -27,6 +27,8 @@
                     <a class="btn btn-outline-primary mx-1" href="{% url 'clientes' %}">Clientes</a>
                     <a class="btn btn-outline-primary mx-1" href="{% url 'vendedores' %}">Vendedores</a>
                     <a class="btn btn-outline-primary mx-1" href="{% url 'buscar' %}">Buscar Productos</a>
+                    <a class="btn btn-outline-primary mx-1" href="{% url 'inicio_sesion' %}">Iniciar sesión</a>
+                    <a class="btn btn-outline-primary mx-1" href="{% url 'registro' %}">Registrarse</a>
                 </div>
             </div>
         </nav>
@@ -44,15 +46,11 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">Acerca de</a></li>
+                            <li class="list-inline-item"><a href="{% url 'acerca_de_mi' %}">Acerca de mi</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contacto</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terminos de uso</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Politica de privacidad</a></li>
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/tobias-b-correa/" target="_blank">Contacto</a></li>
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2025. All Rights Reserved.</p>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Web de Tobias Correa.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">

@@ -71,3 +71,6 @@ def resultados_busqueda(request):
         respuesta = "No enviaste datos"
 
         return HttpResponse(respuesta)
+    
+def acerca_de_mi(request):
+    return render(request, "primera_app/acerca.html")

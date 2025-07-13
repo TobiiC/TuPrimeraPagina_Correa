@@ -29,5 +29,6 @@ urlpatterns = [
     path('formulario_vendedor/', views.formulario_vendedor, name="formulario_vendedor"),
     path('formulario_cliente/', views.formulario_cliente, name="formulario_cliente"),
     path('formulario_producto/', views.formulario_producto, name="formulario_producto"),
-    path('resultados_busqueda/', views.resultados_busqueda, name="resultados_busqueda")
+    path('resultados_busqueda/', views.resultados_busqueda, name="resultados_busqueda"),
+    path('acerca_de_mi/', views.acerca_de_mi, name="acerca_de_mi")
     ]
