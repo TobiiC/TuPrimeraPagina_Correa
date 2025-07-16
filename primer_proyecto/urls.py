@@ -16,19 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from primera_app import views
+from primera_app.views import cliente, vendedor, producto, usuario, views
 
 urlpatterns = [    
     path('admin/', admin.site.urls),
     path('inicio/',views.index, name="index"),
-    path('productos/', views.productos, name="productos"),
-    path('clientes/', views.clientes, name="clientes"),
+    path('productos/', producto.productos, name="productos"),
+    path('clientes/', cliente.clientes, name="clientes"),
     path('busqueda/', views.buscar, name="buscar"),
-    path('vendedores/', views.vendedores, name="vendedores"),
-    path('formulario_vendedor/', views.formulario_vendedor, name="formulario_vendedor"),
-    path('formulario_cliente/', views.formulario_cliente, name="formulario_cliente"),
-    path('formulario_producto/', views.formulario_producto, name="formulario_producto"),
+    path('vendedores/', vendedor.vendedores, name="vendedores"),
+    path('formulario_vendedor/', vendedor.formulario_vendedor, name="formulario_vendedor"),
+    path('formulario_cliente/', cliente.formulario_cliente, name="formulario_cliente"),
+    path('formulario_producto/', producto.formulario_producto, name="formulario_producto"),
     path('resultados_busqueda/', views.resultados_busqueda, name="resultados_busqueda"),
-    path('acerca_de_mi/', views.acerca_de_mi, name="acerca_de_mi")
-    ]
+    path('acerca_de_mi/', views.acerca_de_mi, name="acerca_de_mi"),
+    path('inicio_sesion/', usuario.iniciar_sesion, name="inicio_sesion"),
+    path('editar_perfil/', usuario.edicion_perfil, name="editar_perfil"),
+    path('registrarse/', usuario.registrarse, name="registrarse"),
+    
+]

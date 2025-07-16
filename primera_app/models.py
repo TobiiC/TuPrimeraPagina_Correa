@@ -25,7 +25,7 @@ class cliente(models.Model):
     def __str__(self):
         return f"Cliente: {self.nombre}, Email: {self.email}"
 
-class Avatar(models.Model):
+class avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     imagen = models.ImageField(upload_to='avatares', null=True, blank = True)
