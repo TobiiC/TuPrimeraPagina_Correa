@@ -1,11 +1,11 @@
 from django import forms
-from .models import vendedor, producto, cliente, avatar
+from .models import Vendedor, Producto, Cliente, Avatar
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class vendedor_formulario(forms.ModelForm):
     class Meta:
-        model = vendedor
+        model = Vendedor
         fields = ['nombre', 'apellido', 'email']
         widgets = {
             'email': forms.EmailInput(),
@@ -14,15 +14,15 @@ class vendedor_formulario(forms.ModelForm):
 
 class producto_formulario(forms.ModelForm):
     class Meta:
-        model = producto
+        model = Producto
         fields = ['nombre', 'descripcion', 'precio']
         widgets = {
-            'codigo_producto': forms.NumberInput(),
+            'precio': forms.NumberInput(),
         }
 
 class cliente_formulario(forms.ModelForm):
     class Meta:
-        model = cliente
+        model = Cliente
         fields = ['nombre', 'email']
         widgets = {
             'email': forms.EmailInput(),
@@ -54,5 +54,5 @@ class editar_perfil(UserChangeForm):
 
 class avatar_formulario(forms.ModelForm):
     class Meta:
-        model = avatar
+        model = Avatar
         fields = ['imagen']

@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
-from ..models import producto, vendedor, cliente
-from ..forms import vendedor_formulario, cliente_formulario, producto_formulario
+from ..models import Producto
 from django.http import HttpResponse
 
 # Create your views here.
@@ -15,7 +14,7 @@ def buscar(request):
 def resultados_busqueda(request):
     if request.GET["nombre"]:
         nombre = request.GET['nombre']
-        productos = producto.objects.filter(nombre__icontains=nombre)
+        productos = Producto.objects.filter(nombre__icontains=nombre)
 
         return render(request, "primera_app/formularios/resultados_busqueda.html", {"nombre": nombre, "productos": productos})
 

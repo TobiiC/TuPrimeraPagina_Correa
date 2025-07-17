@@ -1,0 +1,39 @@
+{% extends 'primera_app/padre.html' %}
+{% load static %}
+
+{% block title %}Formulario Producto{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            {% if formularioProducto.errors %}
+                <div class="alert alert-danger text-center" role="alert">
+                    Hay errores en el formulario. Por favor, revisá los datos.
+                </div>
+            {% endif %}
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Editar Producto: {{ id_producto }}</h4>
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <table class="table table-borderless">
+                            {{ formularioProducto.as_table }}
+                        </table>
+                        <div class="d-grid">
+                            <input type="submit" class="btn btn-danger" value="Enviar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+       
+{% endblock %}

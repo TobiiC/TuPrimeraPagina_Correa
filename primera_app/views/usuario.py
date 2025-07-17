@@ -3,7 +3,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from primera_app.forms import registrarse_formulario, editar_perfil, avatar_formulario
-from ..models import avatar
+from ..models import Avatar
+from django.contrib.auth.models import User
 
 def iniciar_sesion(request):
 
@@ -20,7 +21,7 @@ def iniciar_sesion(request):
             if user is not None:
                 login(request, user)
 
-        return redirect('inicio')
+        return redirect('index')
 
     form = AuthenticationForm()
 
@@ -58,7 +59,7 @@ def edicion_perfil(request):
 
             miFormulario.save()
 
-            return redirect('inicio')
+            return redirect('index')
 
     else:
 
@@ -69,12 +70,21 @@ def edicion_perfil(request):
 
 @login_required
 def actualizar_avatar(request):
-    avatar = avatar.objects.filter(user=request.user.id).first()
+    avatar_existente = Avatar.objects.filter(user=request.user).first()
+    
     if request.method == 'POST':
-        form = avatar_formulario(request.POST, request.FILES, instance=avatar)
+        form = avatar_formulario(request.POST, request.FILES, instance=avatar_existente)
         if form.is_valid():
-            form.save()
-            return redirect('inicio')
+            avatar = form.save(commit=False)
+            avatar.user = request.user 
+            avatar.save()
+            return redirect('index')
     else:
-        form = avatar_formulario(instance=avatar)
-    return render(request, '', {'form': form})
+        form = avatar_formulario(instance=avatar_existente)
+
+    return render(request, 'primera_app/usuario/cambiar_avatar.html', {'form': form})
+
+@login_required
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('index')

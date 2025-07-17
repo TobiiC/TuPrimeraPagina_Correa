@@ -1,0 +1,67 @@
+{%  extends 'primera_app/padre.html' %} 
+
+{% load static %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title mb-4 text-center">Clientes</h4>
+                    
+                    {% if clientes %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle text-center">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cliente in clientes %}
+                                        <tr>
+                                            <td>{{ cliente.nombre }}</td>
+                                            <td>{{ cliente.email }}</td>
+                                            <td>
+                                                <a href="{% url 'editar_cliente' cliente.id %}" 
+                                                class="btn btn-secondary btn-sm me-1" 
+                                                title="Editar">
+                                                    <i class="bi bi-pencil-square"></i> Editar
+                                                </a>
+                                                <a href="!#" 
+                                                class="btn btn-danger btn-sm"
+                                                title="Eliminar"
+                                                onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                                                    <i class="bi bi-trash"></i> Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning mt-3" role="alert">
+                            No se encontraron clientes.
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Botón para crear nuevo profesor -->
+                    <div class="mb-3 text-end">
+                        <a href="{% url 'formulario_cliente' %}" class="btn btn-primary">
+                            Agregar nuevo cliente
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+       
+{% endblock %}

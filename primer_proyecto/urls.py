@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from primera_app.views import cliente, vendedor, producto, usuario, views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [    
     path('admin/', admin.site.urls),
@@ -33,5 +35,9 @@ urlpatterns = [
     path('inicio_sesion/', usuario.iniciar_sesion, name="inicio_sesion"),
     path('editar_perfil/', usuario.edicion_perfil, name="editar_perfil"),
     path('registrarse/', usuario.registrarse, name="registrarse"),
-    
-]
+    path('avatar/', usuario.actualizar_avatar, name="editar_avatar"),
+    path('cerrar_sesion/', usuario.cerrar_sesion, name="cerrar_sesion"),
+    path('editar_producto/<int:id_producto>/', producto.editar_producto, name="editar_producto"),
+    path('editar_cliente/<int:id_cliente>/', cliente.editar_cliente, name="editar_cliente"),
+    path('editar_vendedor/<int:id_vendedor>/', vendedor.editar_vendedor, name="editar_vendedor"),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -18,20 +18,38 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" href="{% url 'index' %}"> App Entregable </a>
-                <div>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'index'%}">Inicio</a>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'productos' %}">Productos</a>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'clientes' %}">Clientes</a>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'vendedores' %}">Vendedores</a>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'buscar' %}">Buscar Productos</a>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'inicio_sesion' %}">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary mx-1" href="{% url 'registrarse' %}">Registrarse</a>
-                </div>
-            </div>
-        </nav>
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">App Entregable</a>
+        <div class="d-flex align-items-center">
+            <a class="btn btn-outline-primary mx-1" href="{% url 'index' %}">Inicio</a>
+            <a class="btn btn-outline-primary mx-1" href="{% url 'productos' %}">Productos</a>
+            <a class="btn btn-outline-primary mx-1" href="{% url 'clientes' %}">Clientes</a>
+            <a class="btn btn-outline-primary mx-1" href="{% url 'vendedores' %}">Vendedores</a>
+            <a class="btn btn-outline-primary mx-1" href="{% url 'buscar' %}">Buscar Productos</a>
+
+            {% if request.user.is_authenticated %}
+                {% with user.avatar_set.first as avatar %}
+                    {% if avatar and avatar.imagen %}
+            <img src="{{ avatar.imagen.url }}" alt="Avatar" width="40">
+                    {% else %}
+            <img src="{% static 'ruta/a/tu/avatar_default.png' %}" alt="Sin avatar" width="40">
+                    {% endif %}
+                {% endwith %}
+
+                <span class="mx-2">Hola, {{ user.username }}!</span>
+                <a class="btn btn-outline-primary mx-1" href="{% url 'editar_perfil' %}">Perfil</a>
+                <form action="{% url 'cerrar_sesion' %}" method="post" class="mb-0 mx-1">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Cerrar Sesion</button>
+                </form>
+            {% else %}
+                <a class="btn btn-outline-primary mx-1" href="{% url 'inicio_sesion' %}">Iniciar sesión</a>
+                <a class="btn btn-outline-primary mx-1" href="{% url 'registrarse' %}">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
 
         <main>
             {% block contenido %}
@@ -54,14 +72,8 @@
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                            </li>
                             <li class="list-inline-item">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+                                <a href="https://github.com/TobiiC" target="_blank"><i class="bi-github fs-3"></i></a>
                             </li>
                         </ul>
                     </div>
