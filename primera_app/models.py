@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Vendedor(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(max_length=254)
     
     def __str__(self):
         return f"Vendedor: {self.nombre}, Email: {self.email}"

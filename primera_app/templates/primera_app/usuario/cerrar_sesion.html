@@ -4,13 +4,15 @@
 {% block title %}Sesion Cerrada{% endblock %}
 
 {% block contenido %}
-    
+<div class="container mt-5 mb-5">
     <div class="text-center">
         <meta http-equiv="refresh" content="5; url={% url 'index' %}">
         <h2 class="mb-3">Sesión cerrada con éxito</h2>
         <p>Serás redirigido al inicio en 5 segundos...</p>
         <a href="{% url 'index' %}" class="btn btn-primary mt-3">Ir ahora</a>
     </div>
+</div>
+    
 
 
 {% endblock %}

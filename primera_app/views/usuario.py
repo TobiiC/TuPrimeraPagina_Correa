@@ -70,7 +70,7 @@ def edicion_perfil(request):
 
             formularioEditar.save()
 
-            return redirect('index')
+            return redirect('editar_perfil')
 
     else:
 
