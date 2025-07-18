@@ -12,10 +12,15 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title text-center mb-4">
-                        Login
+                        Iniciar Sesión
                     </h4>
-                    
-
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <form method="post" class="needs-validation" novalidate>
                         {% csrf_token %}
                         <div class="mb-3">
@@ -25,12 +30,9 @@
                             <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                             <a href="{% url 'registrarse' %}" class="btn btn-outline-secondary">Registrarse</a>
                         </div>
-
                     </form>
-                    
                 </div>
             </div>
-
         </div>
     </div>
 </div>

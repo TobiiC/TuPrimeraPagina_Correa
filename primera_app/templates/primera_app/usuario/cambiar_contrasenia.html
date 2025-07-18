@@ -1,8 +1,7 @@
-{%  extends 'primera_app/padre.html' %}
-
+{% extends 'primera_app/padre.html' %}
 {% load static %}
 
-{% block title %}Avatar{% endblock %}
+{% block title %}Formulario Vendedor{% endblock %}
 
 {% block contenido %}
 <div class="container mt-5 mb-5">
@@ -12,23 +11,18 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title text-center mb-4">
-                        Subir Avatar
+                        Cambiar Contraseña
                     </h4>
-                    
-
-                    <form method="post"  enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <form method="post" class="needs-validation" novalidate>
                         {% csrf_token %}
                         <div class="mb-3">
                             {{ form.as_p }}
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Actualizar Avatar</button>
+                       <div class="container text-center">
+                        <button type="submit" class="btn btn-primary">Cambiar</button>
                         </div>
                     </form>
-                    
                 </div>
             </div>
-
         </div>
     </div>
 </div>

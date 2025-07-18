@@ -19,6 +19,7 @@ from django.urls import path
 from primera_app.views import cliente, vendedor, producto, usuario, views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [    
     path('admin/', admin.site.urls),
@@ -36,8 +37,12 @@ urlpatterns = [
     path('editar_perfil/', usuario.edicion_perfil, name="editar_perfil"),
     path('registrarse/', usuario.registrarse, name="registrarse"),
     path('avatar/', usuario.actualizar_avatar, name="editar_avatar"),
-    path('cerrar_sesion/', usuario.cerrar_sesion, name="cerrar_sesion"),
+    path('cerrar_sesion/', LogoutView.as_view(template_name='primera_app/usuario/cerrar_sesion.html'), name="cerrar_sesion"),
     path('editar_producto/<int:id_producto>/', producto.editar_producto, name="editar_producto"),
     path('editar_cliente/<int:id_cliente>/', cliente.editar_cliente, name="editar_cliente"),
     path('editar_vendedor/<int:id_vendedor>/', vendedor.editar_vendedor, name="editar_vendedor"),
+    path('eliminar_producto/<int:id_producto>/', producto.eliminar_producto, name="eliminar_producto"),
+    path('eliminar_cliente/<int:id_cliente>/', cliente.eliminar_cliente, name="eliminar_cliente"),
+    path('eliminar_vendedor/<int:id_vendedor>/', vendedor.eliminar_vendedor, name="eliminar_vendedor"),
+    path('cambiar_contrasenia/', usuario.cambiar_contrasenia, name="cambiar_contrasenia"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -28,17 +28,19 @@
                                             <td>{{ cliente.nombre }}</td>
                                             <td>{{ cliente.email }}</td>
                                             <td>
+                                                {% if request.user.is_authenticated %}
                                                 <a href="{% url 'editar_cliente' cliente.id %}" 
                                                 class="btn btn-secondary btn-sm me-1" 
                                                 title="Editar">
                                                     <i class="bi bi-pencil-square"></i> Editar
                                                 </a>
-                                                <a href="!#" 
+                                                <a href="{% url 'eliminar_cliente' cliente.id %}" 
                                                 class="btn btn-danger btn-sm"
                                                 title="Eliminar"
                                                 onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
                                                     <i class="bi bi-trash"></i> Eliminar
                                                 </a>
+                                                {%endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -51,12 +53,17 @@
                         </div>
                     {% endif %}
                     
-                    <!-- Botón para crear nuevo profesor -->
+                    {% if request.user.is_authenticated %}
                     <div class="mb-3 text-end">
                         <a href="{% url 'formulario_cliente' %}" class="btn btn-primary">
                             Agregar nuevo cliente
                         </a>
                     </div>
+                    {% else %}
+                        <div class="alert alert-warning text-center" role="alert">
+                            Debes iniciar sesión para poder editar esta lista.
+                        </div>
+                    {% endif %}
                 </div>
             </div>
 

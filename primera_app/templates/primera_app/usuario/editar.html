@@ -12,7 +12,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title text-center mb-4">
-                        Formulario - Editar Perfil de {{usuario}}
+                        Editar Perfil de {{usuario}}
                     </h4>
                     
 
@@ -20,9 +20,15 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             {{ form.as_p }}
+
+                            <p class="text-center">¿Necesita cambiar su contraseña? <a href="{% url 'cambiar_contrasenia' %}">Cambiar Contraseña</a></p>
                         </div>
+                        <br>
+                        
+                        <br>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+                            <a href="{% url 'editar_avatar' %}" class="btn btn-secondary">Cambiar Avatar</a>
                         </div>
                     </form>
                     

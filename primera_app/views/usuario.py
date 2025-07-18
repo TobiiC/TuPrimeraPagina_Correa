@@ -2,46 +2,57 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from primera_app.forms import registrarse_formulario, editar_perfil, avatar_formulario
+from primera_app.forms import registrarse_formulario, editar_perfil, avatar_formulario, cambiar_contrasenia_formulario
 from ..models import Avatar
 from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 def iniciar_sesion(request):
 
     if request.method == 'POST':
-        form = AuthenticationForm(request, data = request.POST)
+        formularioInicio = AuthenticationForm(request, data = request.POST)
 
-        if form.is_valid():  # Si pasó la validación de Django
+        if formularioInicio.is_valid():
 
-            usuario = form.cleaned_data.get('username')
-            contrasenia = form.cleaned_data.get('password')
+            usuario = formularioInicio.cleaned_data.get('username')
+            contrasenia = formularioInicio.cleaned_data.get('password')
 
             user = authenticate(username= usuario, password=contrasenia)
 
             if user is not None:
                 login(request, user)
+                return redirect('index')
+            else:
+                messages.error(request, "Usuario o contraseña incorrectos. Por favor, volvé a intentarlo.")
+        else:
+            messages.error(request, "Usuario o contraseña inválidos. Verificá los datos e intentá de nuevo.")
+    else:
+        formularioInicio = AuthenticationForm()
 
-        return redirect('index')
+    formularioInicio = AuthenticationForm()
 
-    form = AuthenticationForm()
-
-    return render(request, "primera_app/usuario/inicio_sesion.html", {"form": form})
+    return render(request, "primera_app/usuario/inicio_sesion.html", {"form": formularioInicio})
 
 def registrarse(request):
 
       if request.method == 'POST':
 
-            form = registrarse_formulario(request.POST)
-            if form.is_valid():
-
-                  username = form.cleaned_data['username']
-                  form.save()
-                  return render(request,"primera_app/templates/primera_app/index.html" ,  {"mensaje":"Usuario Creado :)"})
+            formularioRegistro = registrarse_formulario(request.POST)
+            if formularioRegistro.is_valid():
+                user = formularioRegistro.save(commit=False)
+                user.email = formularioRegistro.cleaned_data['email']
+                user.first_name = formularioRegistro.cleaned_data['first_name']
+                user.last_name = formularioRegistro.cleaned_data['last_name']
+                user.save()
+                  
+                formularioRegistro.save()
+                return render(request,"primera_app/usuario/registrarse.html" ,  {"mensaje":"Usuario Creado :)"})
 
       else:      
-            form = registrarse_formulario()     
+            formularioRegistro = registrarse_formulario()     
 
-      return render(request,"primera_app/usuario/registrarse.html" ,  {"form":form})
+      return render(request,"primera_app/usuario/registrarse.html" ,  {"form":formularioRegistro})
 
 
 @login_required 
@@ -53,19 +64,19 @@ def edicion_perfil(request):
 
     if request.method == 'POST':
 
-        miFormulario = editar_perfil(request.POST, instance=usuario)
+        formularioEditar = editar_perfil(request.POST, instance=usuario)
 
-        if miFormulario.is_valid():
+        if formularioEditar.is_valid():
 
-            miFormulario.save()
+            formularioEditar.save()
 
             return redirect('index')
 
     else:
 
-        miFormulario = editar_perfil(instance=usuario)
+        formularioEditar = editar_perfil(instance=usuario)
 
-    return render(request, "primera_app/usuario/editar.html", {"form": miFormulario, "usuario": usuario})
+    return render(request, "primera_app/usuario/editar.html", {"form": formularioEditar, "usuario": usuario})
 
 
 @login_required
@@ -73,18 +84,40 @@ def actualizar_avatar(request):
     avatar_existente = Avatar.objects.filter(user=request.user).first()
     
     if request.method == 'POST':
-        form = avatar_formulario(request.POST, request.FILES, instance=avatar_existente)
-        if form.is_valid():
-            avatar = form.save(commit=False)
+        formularioAvatar = avatar_formulario(request.POST, request.FILES, instance=avatar_existente)
+        if formularioAvatar.is_valid():
+            avatar = formularioAvatar.save(commit=False)
             avatar.user = request.user 
             avatar.save()
             return redirect('index')
     else:
-        form = avatar_formulario(instance=avatar_existente)
+        formularioAvatar = avatar_formulario(instance=avatar_existente)
 
-    return render(request, 'primera_app/usuario/cambiar_avatar.html', {'form': form})
+    return render(request, 'primera_app/usuario/cambiar_avatar.html', {'form': formularioAvatar})
 
 @login_required
 def cerrar_sesion(request):
     logout(request)
-    return redirect('index')
+    return redirect('cerrar_sesion')
+
+@login_required
+def cambiar_contrasenia(request):
+    if request.method == 'POST':
+        formularioContra = cambiar_contrasenia_formulario(data=request.POST, request=request)
+        if formularioContra.is_valid():
+            user = request.user
+
+            if user.check_password(formularioContra.cleaned_data.get('old_password')):
+                user.set_password(formularioContra.cleaned_data.get('new_password1'))
+                user.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, "Contraseña cambiada exitosamente.")
+                return redirect('index')
+            else:
+                messages.error(request, "La contraseña actual no es correcta.")
+        else:
+            messages.error(request, "Revisá los datos ingresados.")
+    else:
+        formularioContra = cambiar_contrasenia_formulario(request=request)
+
+    return render(request, 'primera_app/usuario/cambiar_contrasenia.html', {'form': formularioContra})

@@ -51,4 +51,4 @@ def editar_vendedor(request, id_vendedor):
         )
            
 
-    return render(request, "primera_app/vendedores/editar_vendedor.html", {"formularioVendedor": formularioVendedor, "profesor_id": vendedor.id})
+    return render(request, "primera_app/vendedores/editar_vendedor.html", {"formularioVendedor": formularioVendedor, "id_vendedor": vendedor.id})

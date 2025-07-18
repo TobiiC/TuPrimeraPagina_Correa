@@ -22,9 +22,9 @@ def formulario_cliente(request):
     
     return render(request, "primera_app/formularios/formulario_cliente.html", {"formularioCliente": formularioCliente})
 
-def eliminar_cliente(request, id_Cliente):
+def eliminar_cliente(request, id_cliente):
  
-    cliente = Cliente.objects.get(id=id_Cliente) 
+    cliente = Cliente.objects.get(id=id_cliente) 
     cliente.delete()
  
     return clientes(request)

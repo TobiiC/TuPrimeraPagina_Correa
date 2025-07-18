@@ -5,10 +5,11 @@
 
 {% block contenido %}
 
+{% if request.user.is_authenticated %}
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-
+    
             {% if formularioVendedor.errors %}
                 <div class="alert alert-danger text-center" role="alert">
                     Hay errores en el formulario. Por favor, revisá los datos.
@@ -34,6 +35,16 @@
         </div>
     </div>
 </div>
-
+{% else %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-warning text-center" role="alert">
+                Debes iniciar sesión para editar un vendedor.
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
        
 {% endblock %}

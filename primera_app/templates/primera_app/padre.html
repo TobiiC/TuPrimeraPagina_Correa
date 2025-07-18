@@ -26,7 +26,7 @@
             <a class="btn btn-outline-primary mx-1" href="{% url 'productos' %}">Productos</a>
             <a class="btn btn-outline-primary mx-1" href="{% url 'clientes' %}">Clientes</a>
             <a class="btn btn-outline-primary mx-1" href="{% url 'vendedores' %}">Vendedores</a>
-            <a class="btn btn-outline-primary mx-1" href="{% url 'buscar' %}">Buscar Productos</a>
+            <a class="btn btn-outline-primary mx-1" href="{% url 'acerca_de_mi' %}">Acerca de mi</a>
 
             {% if request.user.is_authenticated %}
                 {% with user.avatar_set.first as avatar %}
